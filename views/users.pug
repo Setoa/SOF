@@ -1,0 +1,11 @@
+//- 로그인하고 나오는 마이페이지.
+
+extends layout
+block content
+    div.text-center
+        div(class="form-signin")
+            div.text-center
+                p wellCome Dear #{username}!
+                form(action="/users/logout", method="get")
+                    - var buttonClass=['btn', 'btn-lg', 'btn-primary', 'btn-block'];
+                    button(class=buttonClass type="submit") Logout

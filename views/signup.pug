@@ -1,0 +1,27 @@
+extends layout
+block content
+    div.text-center
+        form(class="form-signin" method="POST" action="/users/signup")
+            #error
+                if error1
+                    p.text-danger Error!!! Duplicated Email!!!
+                if error2
+                    p.text-danger Error!!! Password do NOT match!!!
+            - var h1Classes = ['h3', 'mb-3', 'font-weight-normal']
+            h1(class=h1Classes) Sign Up
+            //-input username
+            label( for="inputUsername" class="sr-only") Username
+            input(type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus)
+            //-input email
+            label(for="inputEmail" class="sr-only") Email Address
+            input(type="email" name="email" id="inputEmail" class="form-control" placeholder="Email Address" required)
+            //- input password first
+            label(for="inputPassword1" class="sr-only") Password
+            input(type="password" name="password1" id="inputPassword1" class="form-control" placeholder="Password" required)
+            //- input password second => Confirm Password
+            label(for="inputPassword2" class="sr-only") Password Confirm
+            input(type="password" name="password2" id="inputPassword2" class="form-control" placeholder="Confirm Your Password" required)
+            //-signIn button
+            - var buttonClass=['btn', 'btn-lg', 'btn-primary', 'btn-block'];
+            button(class=buttonClass type="submit") Sign Up
+        a(href="/") Go to Sign in
