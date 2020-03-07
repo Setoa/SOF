@@ -1,0 +1,27 @@
+//- 글쓰기
+//- 글번호는 작성된후 자동 지정되므로 공백으로 냅둔다.
+
+extends layout
+block content
+    include navi
+    form(method="post" action="/board/codeqna/post")
+        table
+            tbody
+                tr
+                    th 글번호
+                    td 
+                    th 글쓴이
+                    td #{username}
+                tr
+                    th Title
+                    td
+                        input(type="text" name="title" placeholder='Input Title' requried)
+                tr
+                    td 
+                        textarea(name="content" cols="30" rows="10" placeholder="Input Content")
+                        //-input(type="text" name="content" placeholder='#{content}' requried)
+                tr
+                    td
+                        a.btn.btn-primary(type="button" href='/board/codeqna/list' style="float:left") 목록
+                    td
+                        button.btn.btn-primary(type="submit" style="float:right") 완료

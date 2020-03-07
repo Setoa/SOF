@@ -5,9 +5,10 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  //console.log(req.session.username);
-  if(req.session){
-    res.render('users',{username:req.session.username});
+  const currentUser=req.user;
+  console.log(currentUser);
+  if(currentUser){
+    res.render('home',{username:currentUser.username});
   }
   else res.render('index', { error: false });
 });
@@ -15,5 +16,11 @@ router.get('/', function(req, res, next) {
 router.get('/signup',function(req,res,next){
   res.render('signup');
 });
+
+router.get('/home',function(req,res,next){
+  res.render('home');
+});
+
+
 
 module.exports = router;

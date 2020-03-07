@@ -9,7 +9,7 @@
 var app = require('../app');
 var debug = require('debug')('expresslogin:server');
 var http = require('http');
-const syncDB=require('../model').sequelize;
+
 /**
  * Get port from environment and store in Express.
  */
@@ -27,9 +27,7 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 //server.listen(port);
-server.listen(port,()=>{
-  console.log('Example App Listening on port 3000');
-});
+server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
@@ -92,7 +90,3 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
-
-syncDB.sync().then(()=>{
-  console.log('DB Synchronized');
-});

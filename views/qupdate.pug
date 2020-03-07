@@ -1,0 +1,29 @@
+//- 글 수정 눌렀을때 나오는 페이지
+//- 감이 좀 안와서 보류중
+//- 기존의 내용이 다 나오고, 그걸 수정할 수 있어야 함
+//- 현재 back에서 데이터를 줄 수 는 있는 상태. 어찌 표현할지 알아야함.
+
+extends layout
+block content
+    include navi
+
+    form(method="post" action=`/board/codeqna/post/${post.id}`)
+        input(type="hidden" name="_method" value="PUT")
+        table
+            tr
+                th 글번호
+                td #{post.id}
+                th 글쓴이
+                td #{username}
+            tr
+                th Title
+                td 
+                    input(type="text" name="title" value=post.title requried)
+            tr
+                td 
+                    textarea(type="text" cols="30" rows="10" name="content") #{post.content}
+            tr
+                td
+                    button.btn.btn-primary(type="submit" style="float:right") 완료
+                td
+                    button.btn.btn-primary(onclick="/board/codeqna/list" style="float:left") 목록

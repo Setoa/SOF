@@ -1,0 +1,54 @@
+extends layout
+block content
+    include navi
+    div.container-fluid
+        div.row
+            div.col-md-12
+                table.table.table-bordered
+                    thead
+                        tr
+                            th
+                                | #
+                            th
+                                | Writer
+                            th
+                                | Title
+                            th
+                                | Answers
+                    tbody
+                        tr
+                            td
+                                | 0
+                            td
+                                | KEHP
+                            td
+                                | Hello World!!
+                            td
+                                | 0
+                        
+                        each row in rows.rows
+                            -const rowData=row.dataValues;
+                            tr
+                                td=rowData.id 
+                                td=row.user.dataValues.username
+                                td
+                                    a(href=`/board/codeqna/post/${rowData.id}`)=rowData.title
+                                td=rowData.howAns
+    div.container-fluid
+        div.row
+            div.col-md-6
+                nav
+                    - const pagelot=Math.floor(rows.count/10)+1;
+                        ul.pagination
+                            li.page-item
+                                a.page-link(href=`/board/codeqna/list/${pagenum-1}`) Previous 
+                            - for(let i=1; i<=pagelot; i++)
+                                li.page-item
+                                    a.page-link(href=`/board/codeqna/list/${i}`)=i
+                            li.page-item
+                                - if(pagenum>=pagelot)
+                                    a.page-link(href=`/board/codeqna/list/${pagelot}`) Next
+                                - else
+                                    a.page-link(href=`/board/codeqna/list/${pagenum+1}`) Next
+            div.col-md-6
+                button.btn.btn-success.btn-md(type='button' onclick="location.href='/board/codeqna/post/write'") 글쓰기

@@ -18,59 +18,84 @@ const User=sequelize.define('user',{
     email:{
         type:Sequelize.STRING,
         allowNull:false
+    },
+    qcount:{
+        type:Sequelize.INTEGER,
+        allowNull:false
+    },
+    acount:{
+        type:Sequelize.INTEGER,
+        allowNull:false
     }
-
 }, 
 {
     timestamps:false,
     freezeTableName:true    //이 시퀄라이즈 Ssibalum은 지 맘대로 복수형으로 테이블명에 s 를 붙여버린다. 이름 바꾸기 싫으면 이걸 넣어주자. Freeze! 
 });
+
+
 // 밑에 Board 관련한 것은 나중에 만들고 나서 처리할 예정.
-/*
+
 const qBoard=sequelize.define('question',{
     title:{
         type:Sequelize.STRING,
-        allowNull=false
+        allowNull:false
     },
     content:{
         type:Sequelize.TEXT,
-        allowNull=true
+        allowNull:true
     },
+    howAns:{
+        type:Sequelize.INTEGER,
+        allowNull:true  //다른 데이터랑 연계해야 함. 일단 보류
+    },
+    uid:{
+        type:Sequelize.INTEGER,
+        allowNull:true //다른 데이터랑 연계해야 함. 일단 보류
+    }
+},
     {
         timestamps:false,
         freezeTableName:true
     }
-});  //질문게시글
+);  //질문게시글
+
+
 
 const aBoard=sequelize.define('answer',{
     title:{
         type:Sequelize.STRING,
-        allowNull=false
+        allowNull:false
     },
     content:{
         type:Sequelize.TEXT,
-        allowNull=true
+        allowNull:true
     },
+    uid:{
+        type:Sequelize.INTEGER,
+        allowNull:true
+    },
+    qid:{
+        type:Sequelize.INTEGER,
+        allowNull:true
+    }
+},
     {
         timestamps:false,
         freezeTableName:true
     }
-});  //답변게시글
-*/
+);  //답변게시글
 
-/*
-const db={};
-
-db.sequelize=sequelize;
-db.Sequelize=Sequelize;
-db.User=User;
-db.qBoard=qBoard;
-db.aBoard=aBoard;
-*/
+User.hasMany(qBoard,{foreignKey:'uid'});
+User.hasMany(aBoard,{foreignKey:'uid'});
+qBoard.hasMany(aBoard,{foreignKey:'qid'});
+qBoard.belongsTo(User,{foreignKey:'uid'});
+aBoard.belongsTo(User,{foreignKey:'uid'});
+aBoard.belongsTo(qBoard,{foreignKey:'qid'});
 
 module.exports={
     sequelize:sequelize,
     User:User,
-    //Question:qBoard,
-    //Answer:aBoard
+    Question:qBoard,
+    Answer:aBoard
 };

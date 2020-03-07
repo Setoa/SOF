@@ -1,0 +1,53 @@
+//- 게시판 들어가서 글 누르면 나오는 view
+extends layout
+block content
+    include navi
+    //- Question
+    div.container
+        table
+            tr
+                th 글번호
+                td #{post.id}
+                th 글쓴이
+                td #{username}
+            tr
+                th Title
+                td #{post.title}
+                    //-input(type="text" name="title" placeholder="제목" requried)
+            tr
+                td #{post.content}
+                    //-input(type="text" name="content" placeholder="내용 입력" requried)
+            tr
+                td
+                    a.btn.btn-primary(href=`/board/codeqna/post/${post.id}/update`) 수정
+                td
+                    form(method="post" action=`/board/codeqna/post/${post.id}`)
+                        input(type="hidden" name="_method" value="DELETE")
+                        button.btn.btn-primary(type="submit") 삭제
+                td
+                    a.btn.btn-primary(href=`/board/codeqna/post/${post.id}/answer/write`) 답변
+                td  
+                    a.btn.btn-primary(href='/board/codeqna/list') 목록
+    //- Answers
+    div.container
+        each ans in answers.rows
+            -const ansData=ans.dataValues;
+                table
+                    tr
+                        th 글번호
+                        td #{ansData.id}
+                        th 글쓴이
+                        td #{ans.user.dataValues.username}
+                    tr
+                        th Title
+                        td #{ansData.title}
+                    tr
+                        td #{ansData.content}
+                    tr
+                        td
+                            a.btn.btn-primary(href=`/board/codeqna/post/${post.id}/answer/${ansData.id}/update`) 수정
+                        td
+                            form(method="post" action=`/board/codeqna/post/${post.id}/answer/${ansData.id}`)
+                                input(type="hidden" name="_method" value="DELETE")
+                                button.btn.btn-primary(type="submit") 삭제
+    //- 답변 보이기

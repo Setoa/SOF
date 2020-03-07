@@ -6,6 +6,6 @@ block content
         div(class="form-signin")
             div.text-center
                 p wellCome Dear #{username}!
-                form(action="/users/logout", method="get")
+                form(action="/users/logout", method="post")
                     - var buttonClass=['btn', 'btn-lg', 'btn-primary', 'btn-block'];
                     button(class=buttonClass type="submit") Logout

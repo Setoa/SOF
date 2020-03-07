@@ -1,0 +1,37 @@
+//- 답변 쓰는 창
+
+extends layout
+block content
+    include navi
+    div.container
+        table
+            tr
+                th 글번호
+                td #{post.id}
+                th 글쓴이
+                td #{username}
+            tr
+                th Title
+                td #{post.title}
+            tr
+                td #{post.content}
+    div.container
+        form(method="post" action=`/board/codeqna/post/${post.id}/answer`)
+            table
+                tr
+                    th 글번호
+                    td 
+                    th 글쓴이
+                    td #{currentUsername}
+                tr
+                    th Title
+                    td
+                        input(type="text" name="atitle" placeholder='Input Title' requried)
+                tr
+                    td 
+                        textarea(name="acontent" cols="30" rows="10" placeholder="Input Content")
+                tr
+                    td
+                        a.btn.btn-primary(type="button" href=`/board/codeqna/post/${post.id}` style="float:left") 취소
+                    td
+                        button.btn.btn-primary(type="submit" style="float:right") 완료
