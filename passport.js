@@ -1,7 +1,6 @@
 const passport=require('passport');
 const LocalStrategy=require('passport-local').Strategy;
 const User=require('./model').User;
-const encryption=require('./encryption');
 const bcrypt=require('bcryptjs');
 
 module.exports=()=>{

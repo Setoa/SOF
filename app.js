@@ -8,6 +8,9 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const boardRouter = require('./routes/board');
+const codeqnaList=require('./routes/codeqna/list');
+const codeqnaPost = require('./routes/codeqna/post');
+const codeqnaAnswer = require('./routes/codeqna/answer');
 const bodyParser=require('body-parser');
 const app = express();
 const session=require('express-session');
@@ -16,8 +19,6 @@ const passportConfig=require('./passport');
 const flash=require('connect-flash');
 const methodOverride=require('method-override');
 const syncDB=require('./model').sequelize;
-const signCheck=require('./signCheck');
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -53,8 +54,10 @@ app.use(methodOverride((req,res)=>{
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-//app.use(signCheck(req,res));
 app.use('/board', boardRouter);
+app.use('/codeqna/list', codeqnaList);
+app.use('/codeqna/post', codeqnaPost);
+app.use('/codeqna/post', codeqnaAnswer);
 
 
 syncDB.sync().then(()=>{
