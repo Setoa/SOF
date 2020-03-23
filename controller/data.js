@@ -37,15 +37,39 @@ module.exports={
         next();
     },
 
+    countQuestionsOfUser:async function(req,res,next){
+        const qcount=await model.Question.count({
+            where:{uid:req.user.id}
+        });
+        req.user.qcount=qcount;
+        next();
+    },
+
+    countAnswersOfUser:async function(req,res,next){
+        const acount=await model.Answer.count({
+            where:{uid:req.user.id}
+        });
+        req.user.acount=acount;
+        next();
+    },
+
+    countAnswersOfQuestions:async function(req,res,next){
+        for(let i=0; i<req.posts.count; i++){
+            let ansOfQuestion=await model.Answer.count({
+                where:{qid:req.posts.rows[i].dataValues.id}
+            });
+            req.posts.rows[i].dataValues.ansOfQuestion=ansOfQuestion;
+        }
+        next();
+    },
+
     newPost:async function(req,res,next){
-        //howAns에 대해 고민해볼것. 쓰는 것 지양해야 함.
         await model.Question.create({
             title:req.body.title,
             content:req.body.content,
             howAns:0,
             uid:req.user.id
         });
-        //아래 부분은 따로 분리해도 될거같은데...일단 유지
         await model.User.update({
             qcount:model.sequelize.literal('qcount+1')
         },{where:{id:req.user.id}});

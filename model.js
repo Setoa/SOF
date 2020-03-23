@@ -2,11 +2,11 @@
 //그 User가 어떤 모델인지 양식을 이용해 변수 취급해서 써놓는거다. 다른데에서 require 조져서 쓸 수 있게.
 //이 과정에서 sequelize 사용!
 
-const config=require('./config/environment').mysql;
-const Sequelize=require('sequelize');
+const config=require("./config/environment").mysql;
+const Sequelize=require("sequelize");
 const sequelize=new Sequelize(config.database, config.username, config.password,config);
 
-const User=sequelize.define('user',{
+const User=sequelize.define("user",{
     username:{
         type:Sequelize.STRING,
         allowNull:false
@@ -18,14 +18,6 @@ const User=sequelize.define('user',{
     email:{
         type:Sequelize.STRING,
         allowNull:false
-    },
-    qcount:{
-        type:Sequelize.INTEGER,
-        allowNull:false
-    },
-    acount:{
-        type:Sequelize.INTEGER,
-        allowNull:false
     }
 }, 
 {
@@ -36,7 +28,7 @@ const User=sequelize.define('user',{
 
 // 밑에 Board 관련한 것은 나중에 만들고 나서 처리할 예정.
 
-const qBoard=sequelize.define('question',{
+const qBoard=sequelize.define("question",{
     title:{
         type:Sequelize.STRING,
         allowNull:false
@@ -45,24 +37,20 @@ const qBoard=sequelize.define('question',{
         type:Sequelize.TEXT,
         allowNull:true
     },
-    howAns:{
-        type:Sequelize.INTEGER,
-        allowNull:true  //다른 데이터랑 연계해야 함. 일단 보류
-    },
     uid:{
         type:Sequelize.INTEGER,
         allowNull:true //다른 데이터랑 연계해야 함. 일단 보류
     }
 },
-    {
-        timestamps:false,
-        freezeTableName:true
-    }
+{
+    timestamps:false,
+    freezeTableName:true
+}
 );  //질문게시글
 
 
 
-const aBoard=sequelize.define('answer',{
+const aBoard=sequelize.define("answer",{
     title:{
         type:Sequelize.STRING,
         allowNull:false
@@ -80,18 +68,18 @@ const aBoard=sequelize.define('answer',{
         allowNull:true
     }
 },
-    {
-        timestamps:false,
-        freezeTableName:true
-    }
+{
+    timestamps:false,
+    freezeTableName:true
+}
 );  //답변게시글
 
-User.hasMany(qBoard,{foreignKey:'uid'});
-User.hasMany(aBoard,{foreignKey:'uid'});
-qBoard.hasMany(aBoard,{foreignKey:'qid'});
-qBoard.belongsTo(User,{foreignKey:'uid'});
-aBoard.belongsTo(User,{foreignKey:'uid'});
-aBoard.belongsTo(qBoard,{foreignKey:'qid'});
+User.hasMany(qBoard,{foreignKey:"uid"});
+User.hasMany(aBoard,{foreignKey:"uid"});
+qBoard.hasMany(aBoard,{foreignKey:"qid"});
+qBoard.belongsTo(User,{foreignKey:"uid"});
+aBoard.belongsTo(User,{foreignKey:"uid"});
+aBoard.belongsTo(qBoard,{foreignKey:"qid"});
 
 module.exports={
     sequelize:sequelize,

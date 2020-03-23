@@ -15,8 +15,6 @@ router.get('/:qid', data.getPost, writer.whoQuestion, data.getAnswers, function(
     res.render('qview',{post:req.post.dataValues, answers:req.answers, qusername:req.Quser.username});
 });
 
-
-
 //질문글쓰기
 router.post('/', auth.isLogin, data.newPost, function(req,res,next){
     res.redirect('/codeqna/list');
