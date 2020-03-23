@@ -9,7 +9,7 @@ block content
                 th 글번호
                 td #{post.id}
                 th 글쓴이
-                td #{username}
+                td #{qUsername}
             tr
                 th Title
                 td #{post.title}
@@ -19,15 +19,15 @@ block content
                     //-input(type="text" name="content" placeholder="내용 입력" requried)
             tr
                 td
-                    a.btn.btn-primary(href=`/board/codeqna/post/${post.id}/update`) 수정
+                    a.btn.btn-primary(href=`/codeqna/post/${post.id}/update`) 수정
                 td
-                    form(method="post" action=`/board/codeqna/post/${post.id}`)
+                    form(method="post" action=`/codeqna/post/${post.id}`)
                         input(type="hidden" name="_method" value="DELETE")
                         button.btn.btn-primary(type="submit") 삭제
                 td
-                    a.btn.btn-primary(href=`/board/codeqna/post/${post.id}/answer/write`) 답변
+                    a.btn.btn-primary(href=`/codeqna/post/${post.id}/answer/write`) 답변
                 td  
-                    a.btn.btn-primary(href='/board/codeqna/list') 목록
+                    a.btn.btn-primary(href='/codeqna/list') 목록
     //- Answers
     div.container
         each ans in answers.rows
@@ -45,9 +45,9 @@ block content
                         td #{ansData.content}
                     tr
                         td
-                            a.btn.btn-primary(href=`/board/codeqna/post/${post.id}/answer/${ansData.id}/update`) 수정
+                            a.btn.btn-primary(href=`/codeqna/post/${post.id}/answer/${ansData.id}/update`) 수정
                         td
-                            form(method="post" action=`/board/codeqna/post/${post.id}/answer/${ansData.id}`)
+                            form(method="post" action=`/codeqna/post/${post.id}/answer/${ansData.id}`)
                                 input(type="hidden" name="_method" value="DELETE")
                                 button.btn.btn-primary(type="submit") 삭제
     //- 답변 보이기

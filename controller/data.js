@@ -120,27 +120,15 @@ module.exports={
         await model.Question.destroy({
             where:{id:req.params.qid}
         });
-        const userAns=await model.Answer.count({
-            where:{qid:req.params.qid,uid:req.user.id}
-        });
         await model.Answer.destroy({
             where:{qid:req.params.qid}
         });
-        await model.User.update({
-            qcount:model.sequelize.literal('qcount-1'),
-            acount:model.sequelize.literal(`acount-${userAns}`)
-        },{where:{id:req.user.id}});
         next();
     },
 
     boomAnswer:async function(req,res,next){
         await model.Answer.destroy({
             where:{id:req.params.aid}
-        });
-        await model.User.update({
-            acount:model.sequelize.literal('acount-1')
-        },{
-            where:{id:req.aUser.id}
         });
         next();
     }

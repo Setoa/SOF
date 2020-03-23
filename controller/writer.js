@@ -4,25 +4,20 @@ const model=require('../model');
 
 module.exports={
     whoQuestion:async function(req,res,next){
-        const qid=req.params.qid;
         const post=await model.Question.findOne({
-            where:{id:qid},
+            where:{id:req.params.qid},
             include:[model.User]
         });
-        const qUser=post.user;
-        req.qUser=qUser;
+        req.qUser=post.user;
         next();
     },
 
     whoAnswer:async function(req,res,next){
-        const qid=req.params.qid;
-        const aid=req.params.aid;
         const answer=await model.Answer.findOne({
-            where:{id:aid},
+            where:{id:req.params.aid},
             include:[model.User]
         });
-        const aUser=answer.user;
-        req.aUser=aUser;
+        req.aUser=answer.user;
         next();
     }
 }

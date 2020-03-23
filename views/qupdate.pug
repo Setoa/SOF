@@ -7,7 +7,7 @@ extends layout
 block content
     include navi
 
-    form(method="post" action=`/board/codeqna/post/${post.id}`)
+    form(method="post" action=`/codeqna/post/${post.id}`)
         input(type="hidden" name="_method" value="PUT")
         table
             tr
@@ -26,4 +26,4 @@ block content
                 td
                     button.btn.btn-primary(type="submit" style="float:right") 완료
                 td
-                    button.btn.btn-primary(onclick="/board/codeqna/list" style="float:left") 목록
+                    button.btn.btn-primary(onclick="/codeqna/list" style="float:left") 목록

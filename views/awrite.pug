@@ -16,7 +16,7 @@ block content
             tr
                 td #{post.content}
     div.container
-        form(method="post" action=`/board/codeqna/post/${post.id}/answer`)
+        form(method="post" action=`/codeqna/post/${post.id}/answer`)
             table
                 tr
                     th 글번호
@@ -32,6 +32,6 @@ block content
                         textarea(name="acontent" cols="30" rows="10" placeholder="Input Content")
                 tr
                     td
-                        a.btn.btn-primary(type="button" href=`/board/codeqna/post/${post.id}` style="float:left") 취소
+                        a.btn.btn-primary(type="button" href=`/codeqna/post/${post.id}` style="float:left") 취소
                     td
                         button.btn.btn-primary(type="submit" style="float:right") 완료

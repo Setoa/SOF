@@ -7,7 +7,7 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
-const boardRouter = require("./routes/board");
+//const boardRouter = require("./routes/board");
 const codeqnaList=require("./routes/codeqna/list");
 const codeqnaPost = require("./routes/codeqna/post");
 const codeqnaAnswer = require("./routes/codeqna/answer");
@@ -54,10 +54,10 @@ app.use(methodOverride((req,res)=>{
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/board", boardRouter);
+//app.use("/board", boardRouter);
 app.use("/codeqna/list", codeqnaList);
 app.use("/codeqna/post", codeqnaPost);
-app.use("/codeqna/post/:qid/answer", codeqnaAnswer);
+app.use("/codeqna/post", codeqnaAnswer);
 
 
 syncDB.sync().then(()=>{

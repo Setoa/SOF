@@ -6,13 +6,12 @@ const data=require('../../controller/data');
 
 //게시판 안에서 글쓰기 누를시 나오는 창
 router.get('/write', auth.isLogin, function(req,res,next){
-    const writeuser=req.user.username;
-    res.render('qwrite',{username:writeuser});
+    res.render('qwrite',{username:rqe.user.username});
 });
 
 //게시물열람
 router.get('/:qid', data.getPost, writer.whoQuestion, data.getAnswers, function(req,res,next){
-    res.render('qview',{post:req.post.dataValues, answers:req.answers, qusername:req.Quser.username});
+    res.render('qview',{post:req.post.dataValues, answers:req.answers, qUsername:req.qUser.username});
 });
 
 //질문글쓰기
@@ -30,7 +29,7 @@ router.put('/:qid', auth.isLogin, writer.whoQuestion, auth.isQwriter, data.chang
 });
 
 //글 삭제 - 모든 답변 같이 삭제해준다
-router.delete('/:qid', auth.isLogin, writer.whoQuestion, data.boomQuestion, function(req,res,next){
+router.delete('/:qid', auth.isLogin, writer.whoQuestion, auth.isQwriter , data.boomQuestion, function(req,res,next){
     res.redirect('/codeqna/list');
 });
 

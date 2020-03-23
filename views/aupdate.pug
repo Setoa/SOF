@@ -21,7 +21,7 @@ block content
             tr
                 td #{post.content}
     div.container
-        form(method="post" action=`/board/codeqna/post/${post.id}/answer/${answer.id}`)
+        form(method="post" action=`/codeqna/post/${post.id}/answer/${answer.id}`)
             input(type="hidden" value="PUT" name="_method")
             table
                 tr
@@ -38,6 +38,6 @@ block content
                         textarea(type="text" name="acontent" cols="30" rows="10") #{answer.content}
                 tr
                     td
-                        a.btn.btn-primary(type="button" href=`/board/codeqna/post/${post.id}` style="float:left") 취소
+                        a.btn.btn-primary(type="button" href=`/codeqna/post/${post.id}` style="float:left") 취소
                     td
                         button.btn.btn-primary(type="submit" style="float:right") 완료

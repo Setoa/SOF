@@ -4,7 +4,7 @@
 extends layout
 block content
     include navi
-    form(method="post" action="/board/codeqna/post")
+    form(method="post" action="/codeqna/post")
         table
             tbody
                 tr
@@ -22,6 +22,6 @@ block content
                         //-input(type="text" name="content" placeholder='#{content}' requried)
                 tr
                     td
-                        a.btn.btn-primary(type="button" href='/board/codeqna/list' style="float:left") 목록
+                        a.btn.btn-primary(type="button" href='/codeqna/list' style="float:left") 목록
                     td
                         button.btn.btn-primary(type="submit" style="float:right") 완료
